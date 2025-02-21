@@ -1,0 +1,49 @@
+﻿@page
+@model BulkyBookWebRazor_Temp.Pages.Categories.CreateModel
+
+
+<form method="post">
+	<div class="border p-3 mt-4">
+		<div class="row pb-2">
+			<h2 class="text-primary">Create Category</h2>
+			<hr />
+		</div>
+
+		@* validation summary also has ModelOnly value which will display error
+		not repated to model props like common errors in val summary*@
+		<div asp-validation-summary="All"></div>
+		<div class="mb-3 row p-1">
+			<label asp-for="Category.Name" class="p-0"></label>
+			<input asp-for="Category.Name" type="text" class="form-control"/>
+			@* tag helpers here helpful to display errors as well *@
+			<span asp-validation-for="Category.Name" class="text-danger"></span>
+		</div>
+		<div class="mb-3 row p-1">
+			<label asp-for="Category.DisplayOrder" class="p-0"></label>
+			<input asp-for="Category.DisplayOrder" type="text" class="form-control" />
+			<span asp-validation-for="Category.DisplayOrder" class="text-danger"></span>
+		</div>
+
+		<div class="row">
+			<div class="col-6 col-md-3">
+				<button type="submit" class="btn btn-primary form-control">Create</button>
+			</div>
+			<div class="col-6 col-md-3">
+				<a asp-page="/categories/index" class="btn btn border form-control">
+					Back to List
+				</a>
+			</div>
+		</div>
+		
+		
+	</div>
+</form>
+
+@* Client side vaidations can be done by adding in scripts
+any custom validations entered in controller will remain server side
+*@
+@section Scripts{
+	@{
+		<partial name="_ValidationScriptsPartial" />
+	}
+}
