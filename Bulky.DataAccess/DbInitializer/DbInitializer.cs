@@ -46,6 +46,32 @@ namespace BulkyBook.DataAccess.DbInitializer
 
 
             //create roles if they are not created
+            //if (!_roleManager.RoleExistsAsync(SD.Role_Customer).GetAwaiter().GetResult())
+            //{
+            //    _roleManager.CreateAsync(new IdentityRole(SD.Role_Customer)).GetAwaiter().GetResult();
+            //    _roleManager.CreateAsync(new IdentityRole(SD.Role_Employee)).GetAwaiter().GetResult();
+            //    _roleManager.CreateAsync(new IdentityRole(SD.Role_Admin)).GetAwaiter().GetResult();
+            //    _roleManager.CreateAsync(new IdentityRole(SD.Role_Company)).GetAwaiter().GetResult();
+
+
+            //    //if roles are not created, then we will create admin user as well
+            //    _userManager.CreateAsync(new ApplicationUser
+            //    {
+            //        UserName = "admin@Rithvij.com",
+            //        Email = "admin@Rithvij.com",
+            //        Name = "Rithvij Pasupuleti",
+            //        PhoneNumber = "1112223333",
+            //        StreetAddress = "test 123 st",
+            //        State = "KS",
+            //        PostalCode = "23422",
+            //        City = "Lawrence"
+            //    }, "Admin123*").GetAwaiter().GetResult();
+
+
+            //    ApplicationUser user = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "admin@Rithvij.com");
+            //    _userManager.AddToRoleAsync(user, SD.Role_Admin).GetAwaiter().GetResult();
+
+            //}
             if (!_roleManager.RoleExistsAsync(SD.Role_Customer).GetAwaiter().GetResult())
             {
                 _roleManager.CreateAsync(new IdentityRole(SD.Role_Customer)).GetAwaiter().GetResult();
@@ -53,9 +79,8 @@ namespace BulkyBook.DataAccess.DbInitializer
                 _roleManager.CreateAsync(new IdentityRole(SD.Role_Admin)).GetAwaiter().GetResult();
                 _roleManager.CreateAsync(new IdentityRole(SD.Role_Company)).GetAwaiter().GetResult();
 
-
-                //if roles are not created, then we will create admin user as well
-                _userManager.CreateAsync(new ApplicationUser
+                // If roles are not created, then we will create admin user as well
+                var adminUser = new ApplicationUser
                 {
                     UserName = "admin@Rithvij.com",
                     Email = "admin@Rithvij.com",
@@ -65,13 +90,24 @@ namespace BulkyBook.DataAccess.DbInitializer
                     State = "KS",
                     PostalCode = "23422",
                     City = "Lawrence"
-                }, "Admin123*").GetAwaiter().GetResult();
+                };
 
+                var result = _userManager.CreateAsync(adminUser, "Admin123*").GetAwaiter().GetResult();
 
-                ApplicationUser user = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "admin@Rithvij.com");
-                _userManager.AddToRoleAsync(user, SD.Role_Admin).GetAwaiter().GetResult();
+                // Check if the user creation was successful
+                if (result.Succeeded)
+                {
+                    // Mark email as confirmed
+                    adminUser.EmailConfirmed = true;
 
+                    // Save changes to confirm email
+                    _db.SaveChanges(); // This will update the database to confirm the email
+
+                    // Add the admin user to the Admin role
+                    _userManager.AddToRoleAsync(adminUser, SD.Role_Admin).GetAwaiter().GetResult();
+                }
             }
+
 
             return;
         }
