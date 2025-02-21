@@ -30,4 +30,9 @@
     <Folder Include="wwwroot\images\product\" />
   </ItemGroup>
 
+	<ItemGroup>
+		<None Remove="..\BulkyWebRazor_Temp\appsettings*.json" />
+	</ItemGroup>
+
+
 </Project>
