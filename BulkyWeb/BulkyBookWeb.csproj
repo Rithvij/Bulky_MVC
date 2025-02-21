@@ -23,16 +23,13 @@
   <ItemGroup>
     <ProjectReference Include="..\Bulky.DataAccess\BulkyBook.DataAccess.csproj" />
     <ProjectReference Include="..\Bulky.Models\BulkyBook.Models.csproj" />
-    <ProjectReference Include="..\BulkyWebRazor_Temp\BulkyWebRazor_Temp.csproj" />
+    
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="wwwroot\images\product\" />
   </ItemGroup>
 
-	<ItemGroup>
-		<None Remove="..\BulkyWebRazor_Temp\appsettings*.json" />
-	</ItemGroup>
 
 
 </Project>
