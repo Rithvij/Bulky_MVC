@@ -17,5 +17,4 @@ This is a full-stack e-Commerce bookstore website built using ASP.NET Core MVC a
 - **Payment Integration:** Stripe
 - **Deployment:** Microsoft Azure
 
- **Sample Preview of Website** - https://bulkymvc-rithvij-e5dbd4htdhcybphv.canadacentral-01.azurewebsites.net/
- ![App Preview](./Bulky_Book_Store.png)
+
