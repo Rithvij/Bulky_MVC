@@ -18,4 +18,5 @@ This is a full-stack e-Commerce bookstore website built using ASP.NET Core MVC a
 - **Deployment:** Microsoft Azure
 
 **App Preview:**
+
  ![App Preview](./Bulky_Book_Store.png)
