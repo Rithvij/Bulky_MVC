@@ -38,7 +38,7 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
                 {
                     //random name for our file
                     string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-                    string productPath = Path.Combine(wwwRootPath, @"wwwroot\images\product");
+                    string productPath = Path.Combine(wwwRootPath, @"\wwwroot\images\product");
                     if (!string.IsNullOrEmpty(productVM.Product.ImageUrl))
                     {
                         //delete old image
@@ -52,7 +52,7 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
                     {
                         file.CopyTo(fileStream);
                     }
-                    productVM.Product.ImageUrl = @"wwwroot\images\product\" + fileName;
+                    productVM.Product.ImageUrl = @"\wwwroot\images\product\" + fileName;
                 }
                 if (productVM.Product.Id == 0)
                 {
